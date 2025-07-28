@@ -8,30 +8,38 @@ import scalafx.scene as sfxs
 import javafx.scene as jfxs
 import scalafx.collections.ObservableBuffer
 import addressapp.model.Person
+import addressapp.util.Database
 import addressapp.view.PersonEditDialogController
+import scalafx.scene.image.Image
 import scalafx.stage.{Modality, Stage}
 
 
 object MainApp extends JFXApp3:
+  Database.setupDB()
 
   // window root pane
-  var roots: Option[sfxs.layout.BorderPane] = None
+  var roots: Option[scalafx.scene.layout.BorderPane] = None
   // ... AFTER THE OTHER VARIABLES ...
+
+  // stylesheet
+  var cssResource = getClass.getResource("view/DarkTheme.css")
 
   // The data as an observable list of Persons.
   val personData = new ObservableBuffer[Person]()
   
   // Constructor
-  personData += new Person("Hans", "Muster")
-  personData += new Person("Ruth", "Mueller")
-  personData += new Person("Heinz", "Kurz")
-  personData += new Person("Cornelia", "Meier")
-  personData += new Person("Werner", "Meyer")
-  personData += new Person("Lydia", "Kunz")
-  personData += new Person("Anna", "Best")
-  personData += new Person("Stefan", "Meier")
-  personData += new Person("Martin", "Mueller")
-
+  // personData += new Person("Hans", "Muster")
+  // personData += new Person("Ruth", "Mueller")
+  // personData += new Person("Heinz", "Kurz")
+  // personData += new Person("Cornelia", "Meier")
+  // personData += new Person("Werner", "Meyer")
+  // personData += new Person("Lydia", "Kunz")
+  // personData += new Person("Anna", "Best")
+  // personData += new Person("Stefan", "Meier")
+  // personData += new Person("Martin", "Mueller")
+  
+  personData ++= Person.getAllPersons  
+  
   // ... THE REST OF THE CLASS ...
   
   override def start(): Unit =
@@ -46,7 +54,9 @@ object MainApp extends JFXApp3:
     roots = Option(loader.getRoot[jfxs.layout.BorderPane])
     stage = new PrimaryStage():
       title = "AddressApp"
+      icons += new Image(getClass.getResource("/Images/book.png").toExternalForm)
       scene = new Scene():
+        stylesheets = Seq(cssResource.toExternalForm)
         root = roots.get
     // call to display PersonOverview when app starts
     showPersonOverview()
@@ -69,6 +79,7 @@ object MainApp extends JFXApp3:
       initModality(Modality.ApplicationModal)
       initOwner(stage)
       scene = new Scene:
+        stylesheets = Seq(cssResource.toExternalForm)
         root = roots2
     control.dialogStage = dialog
     control.person = person

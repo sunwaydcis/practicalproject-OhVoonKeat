@@ -8,8 +8,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="addressapp.view.PersonEditDialogController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="addressapp.view.PersonEditDialogController">
    <children>
       <GridPane layoutX="10.0" layoutY="8.0" prefHeight="282.0" prefWidth="581.0">
         <columnConstraints>
@@ -29,7 +28,7 @@
             <Label text="Last Name" GridPane.rowIndex="1" />
             <Label text="Street" GridPane.rowIndex="2" />
             <Label text="City" GridPane.rowIndex="3" />
-            <Label text="Postal Code" GridPane.rowIndex="4" />
+            <Label stylesheets="@DarkTheme.css" text="Postal Code" GridPane.rowIndex="4" />
             <Label text="Birthday" GridPane.rowIndex="5" />
             <TextField fx:id="firstNameField" GridPane.columnIndex="1" />
             <TextField fx:id="lastNameField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
@@ -39,7 +38,7 @@
             <TextField fx:id="birthdayField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
          </children>
       </GridPane>
-      <Button layoutX="392.0" layoutY="344.0" mnemonicParsing="false" onAction="#handleOk" prefHeight="26.0" prefWidth="78.0" text="OK" />
-      <Button layoutX="507.0" layoutY="344.0" mnemonicParsing="false" onAction="#handleCancel" prefHeight="26.0" prefWidth="78.0" text="Cancel" />
+      <Button defaultButton="true" layoutX="371.0" layoutY="344.0" mnemonicParsing="false" onAction="#handleOk" prefHeight="34.0" prefWidth="99.0" text="OK" />
+      <Button layoutX="486.0" layoutY="344.0" mnemonicParsing="false" onAction="#handleCancel" prefHeight="34.0" prefWidth="99.0" text="Cancel" />
    </children>
 </AnchorPane>
