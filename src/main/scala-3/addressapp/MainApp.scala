@@ -8,6 +8,8 @@ import scalafx.scene as sfxs
 import javafx.scene as jfxs
 import scalafx.collections.ObservableBuffer
 import addressapp.model.Person
+import addressapp.view.PersonEditDialogController
+import scalafx.stage.{Modality, Stage}
 
 
 object MainApp extends JFXApp3:
@@ -56,3 +58,20 @@ object MainApp extends JFXApp3:
     loader.load()
     val roots = loader.getRoot[jfxs.layout.AnchorPane]
     this.roots.get.center = roots
+
+  def showPersonEditDialog(person: Person): Boolean =
+    val resource = getClass.getResource("view/PersonEditDialog.fxml")
+    val loader = new FXMLLoader(resource)
+    loader.load()
+    val roots2 = loader.getRoot[jfxs.Parent]
+    val control = loader.getController[PersonEditDialogController]
+    val dialog = new Stage():
+      initModality(Modality.ApplicationModal)
+      initOwner(stage)
+      scene = new Scene:
+        root = roots2
+    control.dialogStage = dialog
+    control.person = person
+    dialog.showAndWait()
+    control.okClicked // return true if OK
+  end showPersonEditDialog
